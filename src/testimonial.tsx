@@ -7,25 +7,25 @@ const testimonials = [
   {
     name: "Sarthak Srivastava",
     rating: 5,
-    text: "There’s no other program that walks you through exactly what you need to know to start an online store fast...",
+    text: "There’s no other program that walks you through exactly what you need to know to start an online store fast, written by someone who has built several 7-figure ecommerce businesses from scratch. What’s more, everything has been broken down in step-by-step detail with real action plans including finding your niche.",
     date: "22.03.2021",
   },
   {
     name: "Sarthak Srivastava",
     rating: 5,
-    text: "There’s no other program that walks you through exactly what you need to know to start an online store fast...",
+    text: "There’s no other program that walks you through exactly what you need to know to start an online store fast, written by someone who has built several 7-figure ecommerce businesses from scratch. What’s more, everything has been broken down in step-by-step detail with real action plans including finding your niche.",
     date: "22.03.2021",
   },
   {
     name: "Sarthak Srivastava",
     rating: 5,
-    text: "There’s no other program that walks you through exactly what you need to know to start an online store fast...",
+    text: "There’s no other program that walks you through exactly what you need to know to start an online store fast, written by someone who has built several 7-figure ecommerce businesses from scratch. What’s more, everything has been broken down in step-by-step detail with real action plans including finding your niche.",
     date: "22.03.2021",
   },
   {
     name: "Sarthak Srivastava",
     rating: 5,
-    text: "There’s no other program that walks you through exactly what you need to know to start an online store fast...",
+    text: "There’s no other program that walks you through exactly what you need to know to start an online store fast, written by someone who has built several 7-figure ecommerce businesses from scratch. What’s more, everything has been broken down in step-by-step detail with real action plans including finding your niche.",
     date: "22.03.2021",
   },
 ];
@@ -55,7 +55,10 @@ export default function TestimonialCarousel() {
   const prev = () => setIndex((prev) => Math.max(prev - 1, 0));
 
   return (
-    <section className="bg-[#F3F5F6] py-16 px-5 md:px-[100px]">
+    <section
+      id="testimonials"
+      className="bg-[#F3F5F6] py-16 px-5 md:px-[100px]"
+    >
       <div className="text-center mb-10">
         <h2 className="text-3xl md:text-5xl font-semibold">
           We Are Happy To Hear From Pet Parents
