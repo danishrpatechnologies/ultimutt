@@ -1,6 +1,6 @@
 import React from "react";
-import { IoCallOutline } from "react-icons/io5";
-import { FaWhatsapp } from "react-icons/fa";
+import call from "/images/call.svg";
+import whatsapp from "/images/whatsapp.svg";
 import Button from "./UI/button";
 
 const cta = () => {
@@ -11,11 +11,11 @@ const cta = () => {
       </h2>
       <div className="flex items-center gap-x-[5px]">
         <Button variant="secondary">
-          <IoCallOutline /> Call
+          <img src={call} alt="" /> Call
         </Button>
 
         <Button variant="whatsapp">
-          <FaWhatsapp />
+          <img src={whatsapp} alt="" />
           WhatsApp
         </Button>
       </div>

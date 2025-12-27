@@ -3,8 +3,9 @@ import { motion } from "framer-motion";
 import leftArrow from "@/assets/left-arrow.svg";
 import rightArrow from "@/assets/right-arrow.svg";
 import Button from "./UI/button";
-import { IoCallOutline } from "react-icons/io5";
-import { FaWhatsapp } from "react-icons/fa";
+import call from "/images/call.svg";
+import whatsapp from "/images/whatsapp.svg";
+import navigation from "/images/navigation.svg";
 import { CiLocationArrow1 } from "react-icons/ci";
 import { FaLocationDot } from "react-icons/fa6";
 
@@ -96,15 +97,15 @@ function Card() {
 
         <div className="flex items-center gap-x-[5px] pt-4">
           <Button variant="secondary">
-            <IoCallOutline /> Call
+            <img src={call} alt="" /> Call
           </Button>
 
           <Button variant="whatsapp">
-            <FaWhatsapp />
+            <img src={whatsapp} alt="" />
             WhatsApp
           </Button>
           <Button variant="direction">
-            <CiLocationArrow1 />
+            <img src={navigation} alt="" />
             Direction
           </Button>
         </div>
