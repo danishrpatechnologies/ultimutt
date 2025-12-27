@@ -23,8 +23,8 @@ export default function App() {
   };
 
   return (
-    <div className="w-full bg-gray-50 py-12">
-      <h2 className="text-[48px] font-semibold w-full text-center pb-2">
+    <div id="facilities" className="w-full bg-gray-50 py-12">
+      <h2 className="md:text-[48px] sm:text-[32px] font-semibold w-full text-center pb-2">
         Our Facilities
       </h2>
       <section className="relative mx-auto max-w-[1705px] px-4 sm:px-6 lg:px-8 overflow-hidden">

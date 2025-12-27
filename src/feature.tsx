@@ -5,10 +5,15 @@ import checkmarkSquare from "@/assets/checkmark-square.png";
 
 const feature = () => {
   return (
-    <div className='mx-auto flex max-w-full items-center justify-between py-8 md:px-[100px] px-[20px] bg-[url("/images/feature-bg.png")] bg-no-repeat bg-cover max-h-[550px]'>
+    <div
+      id="features"
+      className='mx-auto flex max-w-full items-center justify-between py-8 md:px-[100px] px-[20px] bg-[url("/images/feature-bg.png")] bg-no-repeat bg-cover max-h-[550px]'
+    >
       <div className="flex items-start justify-between w-full gap-4 h-full">
         <div className="relative flex flex-col h-full min-h-[455px]">
-          <h2 className="text-[48px] font-semibold">App Features</h2>
+          <h2 className="md:text-[48px] sm:text-[32px] font-semibold">
+            App Features
+          </h2>
 
           <div className="flex flex-col gap-4 min-h-[calc(100%-72px)] h-full justify-center flex-[1]">
             <div className="flex items-center justify-center gap-4">

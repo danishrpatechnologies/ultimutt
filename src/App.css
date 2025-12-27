@@ -16,3 +16,18 @@
 .scrollbar-hide {
   -ms-overflow-style: none;
 }
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  -webkit-box-shadow: none;
+  background-color: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 3.5px;
+  background-color: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #6D6D6D;
+  border-radius: 3px;
+}

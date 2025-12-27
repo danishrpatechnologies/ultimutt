@@ -40,7 +40,7 @@ const sizeStyles: Record<ButtonSize, string> = {
 const Button = ({
   variant = "primary",
   size = "md",
-  className,
+  className = "cursor-pointer",
   ...props
 }: ButtonProps) => {
   return (
