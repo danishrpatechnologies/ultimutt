@@ -5,7 +5,7 @@ import playStore from "@/assets/play-store.svg";
 const home = () => {
   return (
     <div className='bg-[url("/images/dog-img.png")] bg-no-repeat bg-left min-h-[550px] flex items-center justify-center bg-[#f2e999] relative'>
-      <div className="flex mx-auto flex-col items-center text-center gap-y-4 max-w-[693px] w-full">
+      <div className="flex mx-auto flex-col items-center text-center gap-y-4 max-w-[750px] w-full">
         <h2 className="text-[48px] font-semibold">
           10,000+ Stays, 1,000+ Grooming's
         </h2>
