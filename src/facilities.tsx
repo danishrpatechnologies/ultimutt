@@ -6,15 +6,12 @@ import Button from "./UI/button";
 import call from "/images/call.svg";
 import whatsapp from "/images/whatsapp.svg";
 import navigation from "/images/navigation.svg";
-import { CiLocationArrow1 } from "react-icons/ci";
 import { FaLocationDot } from "react-icons/fa6";
 
 const DATA = [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }, { id: 5 }];
 
 export default function App() {
   const [index, setIndex] = useState(0);
-
-  // cards per view based on breakpoint
   const maxIndex = DATA.length - 1;
 
   const next = () => {
@@ -36,8 +33,9 @@ export default function App() {
           onClick={prev}
           disabled={index === 0}
           className="absolute left-2 top-1/2 z-10 -translate-y-1/2 h-[50px] w-[50px] flex items-center justify-center rounded-full bg-white p-3 shadow-md disabled:opacity-40"
+          aria-label="Previous"
         >
-          <img src={leftArrow} alt="" />
+          <img src={leftArrow} alt="Left arrow" />
         </button>
 
         {/* Right Arrow */}
@@ -45,25 +43,42 @@ export default function App() {
           onClick={next}
           disabled={index === maxIndex}
           className="absolute right-2 top-1/2 z-10 -translate-y-1/2 h-[50px] w-[50px] flex items-center justify-center rounded-full bg-white p-3 shadow-md disabled:opacity-40"
+          aria-label="Next"
         >
-          <img src={rightArrow} alt="" />
+          <img src={rightArrow} alt="Right arrow" />
         </button>
 
         {/* Carousel */}
         <motion.div
           className="flex gap-6"
-          animate={{
-            x: `-${index * 100}%`,
-          }}
-          transition={{
-            duration: 0.6,
-            ease: "easeInOut",
-          }}
+          animate={{ x: `-${index * 100}%` }}
+          transition={{ duration: 0.6, ease: "easeInOut" }}
         >
           {DATA.map((item) => (
             <Card key={item.id} />
           ))}
         </motion.div>
+
+        {/* Dots */}
+        <div className="flex justify-center mt-6 gap-4">
+          {DATA.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => setIndex(i)}
+              aria-label={`Go to slide ${i + 1}`}
+              className="relative w-4 h-4 rounded-full bg-gray-300"
+            >
+              {index === i && (
+                <motion.div
+                  layoutId="activeDot"
+                  className="absolute top-0 left-0 w-4 h-4 rounded-full bg-gray-900"
+                  initial={false}
+                  transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                />
+              )}
+            </button>
+          ))}
+        </div>
       </section>
     </div>
   );
