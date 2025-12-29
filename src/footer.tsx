@@ -40,7 +40,7 @@ const Footer = () => {
 
           <div className="flex gap-3 pt-2 justify-center md:justify-start">
             <a
-              href="https://www.instagram.com/"
+              href="https://instagram.com/ultimutt_petresort?igshid=NzZlODBkYWE4Ng=="
               target="_blank"
               rel="noopener noreferrer"
             >
