@@ -2,11 +2,13 @@ import React from "react";
 import location from "/images/pin-location.png";
 import instagram from "/images/instagram-link.svg";
 import whatsapp from "/images/whatsapp-link.svg";
-import playstore from "/images/google-play.svg";
-import appstore from "/images/app-store.svg";
+// import playstore from "/images/google-play.svg";
+// import appstore from "/images/app-store.svg";
 import footerLogo from "/images/footer-logo.svg";
 import call from "/images/call.svg";
 import { Link } from "react-router-dom";
+import appStore from "@/assets/app-store-white.svg";
+import playStore from "@/assets/play-store-white.svg";
 
 const Footer = () => {
   return (
@@ -81,14 +83,14 @@ const Footer = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <img src={playstore} alt="Google Play" className="h-[44px]" />
+              <img src={playStore} alt="Google Play" className="h-[44px]" />
             </a>
             <a
               href="https://www.apple.com/app-store/"
               target="_blank"
               rel="noopener noreferrer"
             >
-              <img src={appstore} alt="App Store" className="h-[44px]" />
+              <img src={appStore} alt="App Store" className="h-[44px]" />
             </a>
           </div>
         </div>
