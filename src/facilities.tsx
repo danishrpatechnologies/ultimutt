@@ -6,17 +6,41 @@ import Button from "./UI/button";
 import call from "/images/call.svg";
 import whatsapp from "/images/whatsapp.svg";
 import navigation from "/images/navigation.svg";
-import { FaLocationDot } from "react-icons/fa6";
 
 /* -------------------- DATA -------------------- */
 
-const RAW_DATA = [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }, { id: 5 }];
-const MIN_CARDS = 10;
-
-const DATA =
-  RAW_DATA.length >= MIN_CARDS
-    ? RAW_DATA
-    : Array.from({ length: MIN_CARDS }, (_, i) => ({ id: i + 1 }));
+const DATA = [
+  {
+    id: 1,
+    title: "Ultimutt - 5 Star Hotel & Pet Spa",
+    subtitle: "Galleria Market",
+    pickup: "Pick & Drop available across NCR",
+    phone: ["08069069783", "08069061326"],
+    whatsapp: "https://wa.me/c/918826022355",
+    maps: "https://maps.google.com/?q=Ultimutt+-+5+star+Pet+Hotel+%26+Spa+Galleria+Market",
+    image: "/images/facility-1.png",
+  },
+  {
+    id: 2,
+    title: "Ultimutt - 5 Star Pet Resort",
+    subtitle: "Dog Boarding in Gurgaon & Delhi/NCR",
+    pickup: "Pick & Drop available across NCR",
+    phone: ["08069069783", "08069061326"],
+    whatsapp: "https://wa.me/c/918826022355",
+    maps: "https://maps.google.com/?q=Ultimutt+Pet+Resort+Gwal+Pahari",
+    image: "/images/facility-2.png",
+  },
+  {
+    id: 3,
+    title: "Home Grooming by Ultimutt",
+    subtitle: "Dogs & Cats",
+    pickup: "Serving Gurgaon & South Delhi",
+    phone: ["08069069783", "08069061326"],
+    whatsapp: "https://wa.me/c/918826022355",
+    maps: "",
+    image: "/images/facility-3.png",
+  },
+];
 
 /* -------------------- RESPONSIVE HOOK -------------------- */
 
@@ -38,9 +62,9 @@ function useVisibleCards() {
   return visible;
 }
 
-/* -------------------- APP -------------------- */
+/* -------------------- MAIN COMPONENT -------------------- */
 
-export default function App() {
+export default function Facilities() {
   const [index, setIndex] = useState(0);
   const visibleCards = useVisibleCards();
   const containerRef = useRef(null);
@@ -65,25 +89,25 @@ export default function App() {
         ref={containerRef}
         className="relative mx-auto max-w-[1705px] px-4 overflow-hidden"
       >
-        {/* Left Arrow */}
+        {/* LEFT ARROW */}
         <button
           onClick={prev}
           disabled={index === 0}
-          className="absolute left-2 top-[40%] z-10 -translate-y-1/2 h-[50px] w-[50px] flex items-center justify-center rounded-full bg-white p-3 shadow-md disabled:opacity-40"
+          className="absolute left-2 top-1/2 z-10 -translate-y-1/2 h-[50px] w-[50px] flex items-center justify-center rounded-full bg-white p-3 shadow-md disabled:opacity-40"
         >
           <img src={leftArrow} alt="Previous" />
         </button>
 
-        {/* Right Arrow */}
+        {/* RIGHT ARROW */}
         <button
           onClick={next}
           disabled={index === maxIndex}
-          className="absolute right-2 top-[40%] z-10 -translate-y-1/2 h-[50px] w-[50px] flex items-center justify-center rounded-full bg-white p-3 shadow-md disabled:opacity-40"
+          className="absolute right-2 top-1/2 z-10 -translate-y-1/2 h-[50px] w-[50px] flex items-center justify-center rounded-full bg-white p-3 shadow-md disabled:opacity-40"
         >
           <img src={rightArrow} alt="Next" />
         </button>
 
-        {/* Carousel */}
+        {/* CAROUSEL */}
         <motion.div
           className="flex cursor-grab active:cursor-grabbing"
           drag="x"
@@ -96,12 +120,28 @@ export default function App() {
           animate={{ x: `-${index * (100 / visibleCards)}%` }}
           transition={{ type: "spring", stiffness: 300, damping: 30 }}
         >
-          {DATA.map((item) => (
-            <Card key={item.id} />
-          ))}
+          {DATA.map((item, i) => {
+            const isActive = i === index;
+
+            return (
+              <motion.div
+                key={item.id}
+                className="flex-shrink-0 px-3"
+                style={{ width: `${100 / visibleCards}%` }}
+                animate={{
+                  opacity: visibleCards === 1 ? (isActive ? 1 : 0) : 1,
+                  pointerEvents:
+                    visibleCards === 1 && !isActive ? "none" : "auto",
+                }}
+                transition={{ duration: 0.3 }}
+              >
+                <Card data={item} />
+              </motion.div>
+            );
+          })}
         </motion.div>
 
-        {/* Dots */}
+        {/* DOTS */}
         <div className="flex justify-center mt-6 gap-3">
           {Array.from({ length: maxIndex + 1 }).map((_, i) => (
             <button
@@ -125,45 +165,43 @@ export default function App() {
 
 /* -------------------- CARD -------------------- */
 
-function Card() {
+function Card({ data }) {
   return (
-    <div className="flex-shrink-0 w-full sm:w-1/2 lg:w-1/3 px-3">
-      <div className="bg-white rounded-2xl shadow-lg overflow-hidden pointer-events-auto">
-        <img
-          src="/images/facility-1.jpg"
-          alt="Urban Tails Pet Hotel"
-          className="h-[220px] w-full object-cover"
-        />
+    <div className="bg-white rounded-2xl shadow-lg overflow-hidden pointer-events-auto">
+      <img
+        src={data.image}
+        alt={data.title}
+        className="h-[220px] w-full object-cover"
+      />
 
-        <div className="p-4">
-          <h3 className="text-lg font-semibold">Urban Tails Pet Hotel</h3>
+      <div className="p-4">
+        <h3 className="text-lg font-semibold">{data.title}</h3>
+        <p className="text-sm text-gray-600">{data.subtitle}</p>
+        <p className="text-xs text-green-600 mt-1">{data.pickup}</p>
 
-          <p className="flex items-center gap-2 mt-1 text-sm text-gray-500">
-            <FaLocationDot />
-            220, Sikender Pur Vashisht Complex, M G Road
-          </p>
-
-          <div className="flex items-center gap-2 pt-4 flex-wrap">
+        <div className="flex items-center gap-2 pt-4 flex-wrap">
+          <a href={`tel:${data.phone[0]}`}>
             <Button variant="secondary">
-              <img src={call} alt="" /> Call
+              <img src={call} alt="Call" />
+              <span className="hidden sm:inline">Call</span>
             </Button>
+          </a>
 
-            <a
-              href="https://wa.me/c/918826022355"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Button variant="whatsapp">
-                <img src={whatsapp} alt="" />
-                WhatsApp
+          <a href={data.whatsapp} target="_blank" rel="noopener noreferrer">
+            <Button variant="whatsapp">
+              <img src={whatsapp} alt="WhatsApp" />
+              <span className="hidden sm:inline">WhatsApp</span>
+            </Button>
+          </a>
+
+          {data.maps && (
+            <a href={data.maps} target="_blank" rel="noopener noreferrer">
+              <Button variant="direction">
+                <img src={navigation} alt="Directions" />
+                <span className="hidden sm:inline">Direction</span>
               </Button>
             </a>
-
-            <Button variant="direction">
-              <img src={navigation} alt="" />
-              Direction
-            </Button>
-          </div>
+          )}
         </div>
       </div>
     </div>

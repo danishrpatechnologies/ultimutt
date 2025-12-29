@@ -31,3 +31,7 @@
   background-color: #6D6D6D;
   border-radius: 3px;
 }
+
+button{
+  cursor: pointer;
+}

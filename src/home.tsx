@@ -1,6 +1,6 @@
 import React from "react";
-import appStore from "@/assets/app-store.svg";
-import playStore from "@/assets/play-store.svg";
+import appStore from "@/assets/app-store-white.svg";
+import playStore from "@/assets/play-store-white.svg";
 
 const Home = () => {
   return (
@@ -34,27 +34,19 @@ const Home = () => {
         </span>
 
         <div className="flex gap-3 justify-center mt-2 md:mt-0">
-          <a
-            href="https://play.google.com/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          <a href=" " target="_blank" rel="noopener noreferrer">
             <img
               src={playStore}
               alt="Google Play"
-              className="aspect-[12/4] w-[120px] md:w-[120px]"
+              className="aspect-[12/4] w-[120px] md:w-[120px] lg:w-[140px]"
             />
           </a>
 
-          <a
-            href="https://www.apple.com/app-store/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          <a href=" " rel="noopener noreferrer">
             <img
               src={appStore}
               alt="App Store"
-              className="aspect-[12/4] w-[120px] md:w-[120px]"
+              className="aspect-[12/4] w-[120px] md:w-[120px] lg:w-[140px]"
             />
           </a>
         </div>

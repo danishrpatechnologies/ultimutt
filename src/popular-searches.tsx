@@ -48,7 +48,8 @@ const searches = [
 
 export default function PopularSearches() {
   return (
-    <div className="mx-auto flex flex-col max-w-full items-start justify-between py-12 md:px-[100px] px-[20px]">
+    <div className="mx-auto flex flex-col max-w-full items-start py-12 md:px-[100px] px-[20px]">
+      {/* Header */}
       <div className="flex items-center gap-4 mb-6 w-full justify-between">
         <h2 className="md:text-[48px] sm:text-[32px] text-[28px] font-semibold">
           Popular Searches
@@ -56,19 +57,22 @@ export default function PopularSearches() {
         <img
           src={popular}
           alt="Popular"
-          className="aspect-square w-[100px] h-[18px] opacity-50 hidden
-    md:block"
+          className="aspect-square w-[100px] h-[18px] opacity-50 hidden md:block"
         />
       </div>
 
+      {/* Searches */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.4 }}
-        className="md:text-[16px] sm:text-[14px] font-regular"
+        className="md:text-[16px] sm:text-[14px] font-regular flex flex-wrap"
       >
         {searches.map((item, index) => (
-          <span key={index} className="inline">
+          <span
+            key={index}
+            className="inline-flex items-center whitespace-nowrap mr-4 mb-3"
+          >
             <motion.a
               whileHover={{ color: "#d32f2f" }}
               transition={{ duration: 0.15 }}
@@ -81,7 +85,10 @@ export default function PopularSearches() {
             >
               {item}
             </motion.a>
-            {index !== searches.length - 1 && <span className="mx-1">|</span>}
+
+            {index !== searches.length - 1 && (
+              <span className="mx-2 text-gray-400">|</span>
+            )}
           </span>
         ))}
       </motion.div>

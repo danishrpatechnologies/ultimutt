@@ -10,21 +10,23 @@ const Feature = () => {
       className='mx-auto max-w-full
       py-8
       px-4
-      md:px-[100px]
+      lg:px-[100px]
       bg-[url("/images/feature-bg.png")] bg-no-repeat bg-cover
-      md:max-h-[550px]'
+      lg:max-h-[550px]'
     >
-      <div className="flex flex-col md:flex-row items-center md:items-start justify-between w-full gap-6 md:gap-4">
-        {/* LEFT */}
-        <div className="relative flex flex-col h-full md:min-h-[455px] w-full md:w-auto sm:min-h-[auto]">
-          <h2 className="text-[32px] md:text-[48px] font-semibold text-center md:text-left mb-3">
+      {/* MAIN LAYOUT */}
+      <div className="flex flex-col lg:flex-row items-center lg:items-start justify-between w-full gap-6 lg:gap-4">
+        {/* FEATURES (TOP on <1024px, LEFT on ≥1024px) */}
+        <div className="relative flex flex-col h-full lg:min-h-[455px] w-full lg:w-auto">
+          <h2 className="text-[32px] lg:text-[48px] font-semibold text-center lg:text-left mb-3">
             App Features
           </h2>
 
-          {/* FEATURES */}
-          <div className="flex flex-col gap-4 justify-center md:flex-1 ">
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <div className="flex flex-row gap-[8px] rounded-full bg-white py-[10px] px-[24px] w-auto items-center ">
+          {/* FEATURES LIST */}
+          <div className="flex flex-col gap-4 justify-center lg:flex-1">
+            {/* Row 1 */}
+            <div className="flex flex-col sm:flex-row sm:flex-wrap items-center justify-center gap-4">
+              <div className="flex gap-[8px] rounded-full bg-white py-[10px] px-[24px] items-center max-w-full text-center">
                 <img
                   src={checkmarkSquare}
                   alt=""
@@ -32,7 +34,7 @@ const Feature = () => {
                 />
                 Get timely updates on the app
               </div>
-              <div className="flex flex-row gap-[8px] rounded-full bg-white py-[10px] px-[24px] w-auto items-center ">
+              <div className="flex gap-[8px] rounded-full bg-white py-[10px] px-[24px] items-center max-w-full text-center">
                 <img
                   src={checkmarkSquare}
                   alt=""
@@ -42,8 +44,9 @@ const Feature = () => {
               </div>
             </div>
 
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <div className="flex flex-row gap-[8px] rounded-full bg-white py-[10px] px-[24px] w-auto items-center ">
+            {/* Row 2 */}
+            <div className="flex flex-col sm:flex-row sm:flex-wrap items-center justify-center gap-4">
+              <div className="flex gap-[8px] rounded-full bg-white py-[10px] px-[24px] items-center max-w-full text-center">
                 <img
                   src={checkmarkSquare}
                   alt=""
@@ -51,7 +54,7 @@ const Feature = () => {
                 />
                 Boarding, daycare, and grooming — all in one place
               </div>
-              <div className="flex flex-row gap-[8px] rounded-full bg-white py-[10px] px-[24px] w-auto items-center ">
+              <div className="flex gap-[8px] rounded-full bg-white py-[10px] px-[24px] items-center max-w-full text-center">
                 <img
                   src={checkmarkSquare}
                   alt=""
@@ -61,8 +64,9 @@ const Feature = () => {
               </div>
             </div>
 
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <div className="flex flex-row gap-[8px] rounded-full bg-white py-[10px] px-[24px] w-auto items-center ">
+            {/* Row 3 */}
+            <div className="flex flex-col sm:flex-row sm:flex-wrap items-center justify-center gap-4">
+              <div className="flex gap-[8px] rounded-full bg-white py-[10px] px-[24px] items-center max-w-full text-center">
                 <img
                   src={checkmarkSquare}
                   alt=""
@@ -70,7 +74,7 @@ const Feature = () => {
                 />
                 Activity Tracking for Boarding Services
               </div>
-              <div className="flex flex-row gap-[8px] rounded-full bg-white py-[10px] px-[24px] w-auto items-center ">
+              <div className="flex gap-[8px] rounded-full bg-white py-[10px] px-[24px] items-center max-w-full text-center">
                 <img
                   src={checkmarkSquare}
                   alt=""
@@ -82,19 +86,16 @@ const Feature = () => {
           </div>
         </div>
 
-        {/* RIGHT IMAGES */}
-        <div className="right flex flex-row gap-0 md:ml-[50px] mt-8 md:mt-0">
+        {/* MOCKUPS (BOTTOM on <1024px, RIGHT on ≥1024px) */}
+        <div className="flex flex-row gap-0 mt-8 lg:mt-0 justify-center lg:justify-end">
           <img
             src={featureMockupLeft}
-            className="w-[180px] sm:w-[220px] md:w-auto"
+            className="relative right-[-40px] lg:right-[-80px] w-[180px] sm:w-[220px] lg:w-auto"
             alt=""
           />
           <img
             src={featureMockupRight}
-            className="relative
-            left-0
-            md:left-[-80px]
-            w-[180px] sm:w-[220px] md:w-auto"
+            className="relative right-[40px] lg:right-0 w-[180px] sm:w-[220px] lg:w-auto"
             alt=""
           />
         </div>

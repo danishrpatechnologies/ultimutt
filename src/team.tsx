@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const images = [
-  "/images/team-1.png",
+  "/images/team-1.jpeg",
   "/images/team-2.png",
   "/images/team-3.png",
   "/images/team-4.png",
@@ -15,148 +15,101 @@ const images = [
   "/images/team-10.png",
 ];
 
-// Desktop-tuned values (UNCHANGED)
-const CARD_WIDTH = 360;
-const CARD_HEIGHT = 520;
-const OVERLAP = 140;
-const SIDE_FADE = 240;
+const CARD_WIDTH = 340;
+const CARD_HEIGHT = 500;
+const GAP = 60;
+const AUTOPLAY_DELAY = 4000;
 
-export default function OverlapCenteredCarousel() {
+export default function CleanTeamCarousel() {
   const [active, setActive] = useState(0);
-  const [isMobile, setIsMobile] = useState(false);
   const total = images.length;
+  const hovering = useRef(false);
 
   const next = () => setActive((p) => (p + 1) % total);
   const prev = () => setActive((p) => (p - 1 + total) % total);
 
-  // Detect very small screens
+  /* Autoplay */
   useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth < 640);
-    check();
-    window.addEventListener("resize", check);
-    return () => window.removeEventListener("resize", check);
+    const id = setInterval(() => {
+      if (!hovering.current) next();
+    }, AUTOPLAY_DELAY);
+    return () => clearInterval(id);
   }, []);
 
   return (
-    <section className="mx-auto max-w-[1700px] px-6 md:px-[100px] pt-20 pb-10">
+    <section className="mx-auto max-w-full py-12 px-[20px] md:px-[100px]">
       {/* Header */}
-      <div className="text-center mb-6">
-        <h2 className="text-[28px] sm:text-[32px] md:text-[48px] font-semibold">
-          Meet Our Team
-        </h2>
-        <p className="text-[16px] sm:text-[18px] md:text-[26px] font-medium text-black/70">
+      <div className="text-center mb-10">
+        <h2 className="text-4xl md:text-5xl font-semibold">Meet Our Team</h2>
+        <p className="mt-2 text-lg md:text-xl text-black/60">
           The passionate pet lovers behind our care
         </p>
       </div>
 
-      {/* Carousel */}
-      <div className="relative flex flex-col items-center">
-        {/* Desktop arrows */}
+      <div
+        className="relative flex items-center justify-center overflow-hidden"
+        onMouseEnter={() => (hovering.current = true)}
+        onMouseLeave={() => (hovering.current = false)}
+      >
+        {/* Left Arrow (ALL screens) */}
         <button
           onClick={prev}
-          className="hidden md:flex
-    absolute
-    left-0
-    top-1/2
-    -translate-y-1/2
-    z-50
-    h-12 w-12
-    items-center justify-center
-    rounded-full border bg-white shadow-md
-    transition hover:scale-105"
+          className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-30
+          h-11 w-11 sm:h-12 sm:w-12
+          flex items-center justify-center
+          rounded-full bg-white border transition hover:scale-105"
         >
           <ChevronLeft />
         </button>
 
-        <div className="relative h-[560px] w-full overflow-hidden">
-          {/* Edge fades (desktop only) */}
-          <div
-            className="pointer-events-none absolute left-0 top-0 h-full z-40 hidden md:block"
-            style={{
-              width: SIDE_FADE,
-              background:
-                "linear-gradient(to right, white 35%, rgba(255,255,255,0))",
-            }}
-          />
-          <div
-            className="pointer-events-none absolute right-0 top-0 h-full z-40 hidden md:block"
-            style={{
-              width: SIDE_FADE,
-              background:
-                "linear-gradient(to left, white 35%, rgba(255,255,255,0))",
-            }}
-          />
-
-          {/* Slides */}
+        {/* Slides */}
+        <div className="relative h-[520px] w-full flex items-center justify-center">
           {images.map((src, index) => {
             let offset = index - active;
             if (offset > total / 2) offset -= total;
             if (offset < -total / 2) offset += total;
 
-            const isActive = offset === 0;
+            if (Math.abs(offset) > 3) return null;
 
             return (
               <motion.div
                 key={index}
-                className="absolute left-1/2 top-1/2"
-                style={{ width: CARD_WIDTH, height: CARD_HEIGHT }}
                 animate={{
-                  x: `calc(-50% + ${
-                    offset * (CARD_WIDTH - (isMobile ? 0 : OVERLAP))
-                  }px)`,
-                  y: "-50%",
-                  scale: isActive ? 1 : 0.96,
-                  zIndex: isActive ? 30 : 20 - Math.abs(offset),
+                  x: offset * (CARD_WIDTH + GAP),
+                  scale: offset === 0 ? 1 : 0.88,
                 }}
-                transition={{ duration: 0.45, ease: "easeInOut" }}
+                transition={{
+                  type: "spring",
+                  stiffness: 140,
+                  damping: 24,
+                }}
+                className="absolute"
+                style={{
+                  width: CARD_WIDTH,
+                  height: CARD_HEIGHT,
+                  zIndex: 10 - Math.abs(offset),
+                }}
               >
                 <img
                   src={src}
                   alt="team"
-                  className="h-full w-full object-cover"
-                  style={{
-                    borderRadius: 12,
-                    boxShadow: isActive
-                      ? "0 18px 40px rgba(0,0,0,0.35)"
-                      : "0 10px 24px rgba(0,0,0,0.18)",
-                  }}
+                  className="h-full w-full object-cover rounded-xl md:rounded-2xl"
                 />
               </motion.div>
             );
           })}
         </div>
 
+        {/* Right Arrow (ALL screens) */}
         <button
           onClick={next}
-          className="hidden md:flex
-    absolute
-    right-0
-    top-1/2
-    -translate-y-1/2
-    z-50
-    h-12 w-12
-    items-center justify-center
-    rounded-full border bg-white shadow-md
-    transition hover:scale-105"
+          className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-30
+          h-11 w-11 sm:h-12 sm:w-12
+          flex items-center justify-center
+          rounded-full bg-white border transition hover:scale-105"
         >
           <ChevronRight />
         </button>
-
-        {/* Mobile arrows (bottom) */}
-        <div className="flex md:hidden gap-6 mt-6">
-          <button
-            onClick={prev}
-            className="h-12 w-12 flex items-center justify-center rounded-full border bg-white shadow-md"
-          >
-            <ChevronLeft />
-          </button>
-          <button
-            onClick={next}
-            className="h-12 w-12 flex items-center justify-center rounded-full border bg-white shadow-md"
-          >
-            <ChevronRight />
-          </button>
-        </div>
       </div>
     </section>
   );

@@ -3,24 +3,85 @@ import { ChevronDown } from "lucide-react";
 
 const faqs = [
   {
-    q: "How do I book a service?",
-    a: "You can easily book through our mobile app or website by selecting your preferred service, date, and time.",
+    q: "What boarding options does Ultimutt offer and where are they located?",
+    a: (
+      <div className="space-y-2">
+        <p>
+          <strong>
+            Ultimutt offers premium dog boarding at two Gurgaon locations:
+          </strong>
+        </p>
+        <ul className="list-disc pl-5 space-y-1">
+          <li>
+            <strong>Gwal Pahari</strong> – resort-style boarding for all breeds
+          </li>
+          <li>
+            <strong>Galleria Market</strong> – a 5-star, indoor boarding
+            facility exclusively for small breeds
+          </li>
+        </ul>
+        <p>
+          Both are professionally managed with structured routines and
+          personalised care.
+        </p>
+      </div>
+    ),
   },
   {
-    q: "Do you provide emergency support?",
-    a: "Yes, we offer emergency support depending on availability. Please contact our support team immediately.",
+    q: "Are caretakers available round the clock at the boarding facilities?",
+    a: (
+      <p>
+        Yes. <strong>Dedicated caretakers are present</strong>
+        <strong>24×7</strong> at both our boarding locations to ensure constant
+        supervision, comfort, and safety of all pets.
+      </p>
+    ),
   },
   {
-    q: "Can I track my pet during service?",
-    a: "Yes, real-time tracking is available through our app for selected services.",
+    q: "Will I receive updates about my pet during boarding?",
+    a: (
+      <p>
+        Absolutely. Pet parents receive{" "}
+        <strong>10+ photo and video updates</strong> during the stay, shared
+        regularly so you can stay connected and stress-free while your pet is
+        with us.
+      </p>
+    ),
   },
   {
-    q: "What if my pet has medical conditions?",
-    a: "Please inform us during booking so our team can take proper care and precautions.",
+    q: "Do you provide pick-up and drop services for boarding?",
+    a: (
+      <p>
+        Yes, we offer <strong>doorstep pick-up and drop services</strong> for
+        boarding bookings at both Gwal Pahari and Galleria, subject to location
+        and availability.
+      </p>
+    ),
   },
   {
-    q: "How do you ensure my pet’s safety?",
-    a: "All caregivers are trained professionals, and we follow strict safety protocols.",
+    q: "What is included in Ultimutt’s grooming at home service?",
+    a: (
+      <div className="space-y-2">
+        <p>
+          Our grooming at home includes bathing, drying with professional
+          dryers, trimming, de-shedding, nail clipping, ear cleaning, and
+          styling. Services are performed by trained groomers using pet-safe
+          products, ensuring comfort even during winters.
+        </p>
+      </div>
+    ),
+  },
+  {
+    q: "How is grooming at Ultimutt’s spa different from regular pet salons?",
+    a: (
+      <p>
+        Ultimutt’s grooming spa offers a{" "}
+        <strong>calm, hygienic, and professionally managed environment</strong>{" "}
+        with trained in-house groomers, premium pet-safe products, and
+        individual attention. We follow structured grooming protocols to ensure
+        your pet feels relaxed, safe, and well cared for throughout the session.
+      </p>
+    ),
   },
 ];
 
@@ -71,7 +132,7 @@ export default function FAQSection() {
                 </button>
 
                 {isOpen && (
-                  <div className="px-6 pt-3 border-t-1 border-t-[#AFAFAF] md:text-[16px] sm:text-[14px] pt-3 text-[#454545] leading-relaxed">
+                  <div className="px-6 pt-3 border-t-1 border-t-[#AFAFAF] md:text-[16px] sm:text-[14px] text-[#454545] leading-relaxed">
                     {item.a}
                   </div>
                 )}

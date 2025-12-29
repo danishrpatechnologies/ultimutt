@@ -21,7 +21,7 @@ const Footer = () => {
           md:flex-row
           md:items-start
           md:justify-between
-          gap-10
+          gap-0
         "
       >
         {/* Left */}
@@ -64,7 +64,7 @@ const Footer = () => {
         </div>
 
         {/* Divider (desktop only) */}
-        <div className="hidden md:block w-[1px] h-[180px] bg-white/20 mx-8" />
+        <div className="hidden md:block w-[1px] h-[180px] bg-white/20 mx-6" />
 
         {/* Middle */}
         <div className="flex flex-col gap-4 w-full md:max-w-[360px] text-center md:text-left">
@@ -93,7 +93,7 @@ const Footer = () => {
         </div>
 
         {/* Divider (desktop only) */}
-        <div className="hidden md:block w-[1px] h-[180px] bg-white/20 mx-8" />
+        <div className="hidden md:block w-[1px] h-[180px] bg-white/20 mx-6" />
 
         {/* Right */}
         <div className="flex flex-col gap-4 w-full md:max-w-[320px] text-center md:text-left">
@@ -139,7 +139,7 @@ const Footer = () => {
           "
         >
           <span className="text-[14px] md:text-[16px] text-center md:text-left">
-            Copyright © 2024 Ultimutt. All Rights Reserved.
+            Copyright © 2026 Ultimutt. All Rights Reserved.
           </span>
 
           <div className="flex gap-6">
