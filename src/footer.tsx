@@ -6,6 +6,7 @@ import playstore from "/images/google-play.svg";
 import appstore from "/images/app-store.svg";
 import footerLogo from "/images/footer-logo.svg";
 import call from "/images/call.svg";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -143,18 +144,18 @@ const Footer = () => {
           </span>
 
           <div className="flex gap-6">
-            <a
-              href="/privacy-policy"
+            <Link
+              to="/privacy-policy"
               className="hover:text-white text-[14px] md:text-[16px]"
             >
               Privacy Policy
-            </a>
-            <a
-              href="/terms-of-use"
+            </Link>
+            <Link
+              to="/terms-of-use"
               className="hover:text-white text-[14px] md:text-[16px]"
             >
               Terms of Use
-            </a>
+            </Link>
           </div>
         </div>
       </div>
