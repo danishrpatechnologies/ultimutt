@@ -10,7 +10,7 @@ const why = () => {
   return (
     <div className="mx-auto flex flex-col gap-8 max-w-full items-center justify-between py-12 md:px-[100px] px-[20px]">
       <div className="flex flex-col gap-2 w-full text-center">
-        <h2 className="md:text-[48px] sm:text-[32px] font-semibold">
+        <h2 className="md:text-[48px] sm:text-[32px] text-[28px] font-semibold">
           Why Choose Ultimutt?
         </h2>
         <span className="md:text-[26px] sm:text-[18px] font-medium">

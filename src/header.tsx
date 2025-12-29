@@ -4,7 +4,20 @@ import siteLogo from "@/assets/ultimutt-logo.svg";
 const SECTIONS = ["home", "features", "facilities", "testimonials"];
 
 const Header = () => {
-  const [activeSection, setActiveSection] = useState<string>("home");
+  const [activeSection, setActiveSection] = useState("home");
+
+  const [isMounted, setIsMounted] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+
+  const openMenu = () => {
+    setIsMounted(true);
+    requestAnimationFrame(() => setIsOpen(true));
+  };
+
+  const closeMenu = () => {
+    setIsOpen(false);
+    setTimeout(() => setIsMounted(false), 300); // match animation duration
+  };
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
@@ -14,16 +27,7 @@ const Header = () => {
     const elementPosition = element.getBoundingClientRect().top;
     const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
 
-    window.scrollTo({
-      top: offsetPosition,
-      behavior: "smooth",
-    });
-  };
-
-  const closeMobileMenu = () => {
-    (
-      document.getElementById("mobile-menu") as HTMLDialogElement | null
-    )?.close();
+    window.scrollTo({ top: offsetPosition, behavior: "smooth" });
   };
 
   // 🔥 Intersection Observer
@@ -36,10 +40,7 @@ const Header = () => {
           }
         });
       },
-      {
-        rootMargin: "-50% 0px -50% 0px",
-        threshold: 0,
-      }
+      { rootMargin: "-50% 0px -50% 0px" }
     );
 
     SECTIONS.forEach((id) => {
@@ -50,10 +51,10 @@ const Header = () => {
     return () => observer.disconnect();
   }, []);
 
-  const linkClass = (id: string) =>
-    `text-sm transition font-${
-      activeSection === id ? "bold" : "normal"
-    } text-gray-900`;
+  // 🔒 Lock body scroll
+  useEffect(() => {
+    document.body.style.overflow = isOpen ? "hidden" : "";
+  }, [isOpen]);
 
   return (
     <header
@@ -75,70 +76,77 @@ const Header = () => {
 
         {/* Desktop Menu */}
         <div className="hidden lg:flex gap-12">
-          <button
-            onClick={() => scrollToSection("home")}
-            className={linkClass("home")}
-          >
-            Home
-          </button>
-          <button
-            onClick={() => scrollToSection("features")}
-            className={linkClass("features")}
-          >
-            App Features
-          </button>
-          <button
-            onClick={() => scrollToSection("facilities")}
-            className={linkClass("facilities")}
-          >
-            Our Facilities
-          </button>
-          <button
-            onClick={() => scrollToSection("testimonials")}
-            className={linkClass("testimonials")}
-          >
-            Testimonials
-          </button>
+          {SECTIONS.map((id) => (
+            <button
+              key={id}
+              onClick={() => scrollToSection(id)}
+              className={`text-sm transition ${
+                activeSection === id ? "font-bold" : "font-normal"
+              }`}
+            >
+              {id === "features"
+                ? "App Features"
+                : id === "facilities"
+                ? "Our Facilities"
+                : id === "testimonials"
+                ? "Testimonials"
+                : "Home"}
+            </button>
+          ))}
         </div>
 
-        {/* Mobile Menu Button */}
-        <button
-          className="lg:hidden"
-          onClick={() =>
-            (
-              document.getElementById("mobile-menu") as HTMLDialogElement | null
-            )?.showModal()
-          }
-        >
+        {/* Hamburger */}
+        <button className="lg:hidden text-2xl" onClick={openMenu}>
           ☰
         </button>
       </nav>
 
-      {/* Mobile Menu */}
-      <dialog id="mobile-menu" className="lg:hidden backdrop:bg-black/30">
-        <div className="fixed right-0 top-0 h-full w-full max-w-sm bg-white p-6">
-          <button onClick={closeMobileMenu} className="mb-6">
-            ✕
-          </button>
+      {/* Mobile Sidebar */}
+      {isMounted && (
+        <div className="fixed inset-0 z-200 lg:hidden">
+          {/* Backdrop */}
+          <div
+            className={`absolute inset-0 bg-black/30 transition-opacity duration-300 ${
+              isOpen ? "opacity-100" : "opacity-0"
+            }`}
+            onClick={closeMenu}
+          />
 
-          <div className="space-y-4">
-            {SECTIONS.map((id) => (
-              <button
-                key={id}
-                onClick={() => {
-                  scrollToSection(id);
-                  closeMobileMenu();
-                }}
-                className={`block text-left text-lg font-${
-                  activeSection === id ? "bold" : "normal"
-                }`}
-              >
-                {id.charAt(0).toUpperCase() + id.slice(1)}
-              </button>
-            ))}
+          {/* Sidebar */}
+          <div
+            className={`absolute right-0 top-0 h-full w-full max-w-sm bg-white p-6
+            transform transition-transform duration-300 ease-in-out
+            ${isOpen ? "translate-x-0" : "translate-x-full"}`}
+          >
+            <button onClick={closeMenu} className="mb-6 text-xl">
+              ✕
+            </button>
+
+            <div className="space-y-4">
+              {SECTIONS.map((id) => (
+                <button
+                  key={id}
+                  onClick={() => {
+                    scrollToSection(id);
+                    closeMenu();
+                  }}
+                  className={`block text-left text-lg ${
+                    activeSection === id ? "font-bold" : "font-normal"
+                  }`}
+                >
+                  {id === "features"
+                    ? "App Features"
+                    : id === "facilities"
+                    ? "Our Facilities"
+                    : id === "testimonials"
+                    ? "Testimonials"
+                    : "Home"}
+                </button>
+              ))}
+            </div>
           </div>
         </div>
-      </dialog>
+      )}
     </header>
   );
 };
