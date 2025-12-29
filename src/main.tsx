@@ -12,6 +12,7 @@ import Testimonial from "./testimonial.tsx";
 import Team from "./team.tsx";
 import Faq from "./faq.tsx";
 import Footer from "./footer.tsx";
+import PopularSearches from "./popular-searches.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
@@ -25,6 +26,7 @@ createRoot(document.getElementById("root")!).render(
     <Testimonial />
     <Team />
     <Faq />
+    <PopularSearches />
     <Footer />
     <App />
   </StrictMode>

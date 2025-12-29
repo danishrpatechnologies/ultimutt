@@ -28,10 +28,10 @@ export default function FAQSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section className="w-full bg-[#F6EE9A] py-16 px-4">
-      <div className="mx-auto max-w-[1100px] flex flex-col gap-8">
+    <section className="w-full bg-[#F6EE9A]">
+      <div className="mx-auto flex flex-col max-w-full items-start justify-between py-12 md:px-[100px] px-[20px]">
         {/* Header */}
-        <div className="flex flex-col gap-2 w-full text-center">
+        <div className="flex flex-col gap-2 w-full text-center mb-8">
           <h2 className="md:text-[48px] sm:text-[32px] text-[28px] font-semibold">
             Frequently Asked Questions
           </h2>
@@ -41,7 +41,7 @@ export default function FAQSection() {
         </div>
 
         {/* FAQ Items */}
-        <div className="space-y-4">
+        <div className="space-y-4 w-full">
           {faqs.map((item, index) => {
             const isOpen = openIndex === index;
 

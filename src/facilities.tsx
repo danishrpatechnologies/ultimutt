@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import leftArrow from "@/assets/left-arrow.svg";
 import rightArrow from "@/assets/right-arrow.svg";
@@ -8,26 +8,66 @@ import whatsapp from "/images/whatsapp.svg";
 import navigation from "/images/navigation.svg";
 import { FaLocationDot } from "react-icons/fa6";
 
-const DATA = [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }, { id: 5 }];
+/* -------------------- DATA (min 10 cards) -------------------- */
+
+const RAW_DATA = [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }, { id: 5 }];
+const MIN_CARDS = 10;
+
+const DATA =
+  RAW_DATA.length >= MIN_CARDS
+    ? RAW_DATA
+    : Array.from({ length: MIN_CARDS }, (_, i) => ({
+        id: i + 1,
+      }));
+
+/* -------------------- RESPONSIVE HOOK -------------------- */
+
+function useVisibleCards() {
+  const [visible, setVisible] = useState(1);
+
+  useEffect(() => {
+    const update = () => {
+      if (window.innerWidth >= 1024) setVisible(3); // lg
+      else if (window.innerWidth >= 640) setVisible(2); // sm
+      else setVisible(1); // mobile
+    };
+
+    update();
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
+  }, []);
+
+  return visible;
+}
+
+/* -------------------- APP -------------------- */
 
 export default function App() {
   const [index, setIndex] = useState(0);
-  const maxIndex = DATA.length - 1;
+  const visibleCards = useVisibleCards();
+
+  const maxIndex = Math.max(0, DATA.length - visibleCards);
 
   const next = () => {
-    if (index < maxIndex) setIndex(index + 1);
+    setIndex((prev) => Math.min(prev + 1, maxIndex));
   };
 
   const prev = () => {
-    if (index > 0) setIndex(index - 1);
+    setIndex((prev) => Math.max(prev - 1, 0));
   };
+
+  /* Clamp index on resize */
+  useEffect(() => {
+    if (index > maxIndex) setIndex(maxIndex);
+  }, [maxIndex, index]);
 
   return (
     <div id="facilities" className="w-full bg-gray-50 py-12">
-      <h2 className="md:text-[48px] sm:text-[32px] font-semibold w-full text-center pb-2">
+      <h2 className="md:text-[48px] sm:text-[32px] font-semibold text-center pb-2">
         Our Facilities
       </h2>
-      <section className="relative mx-auto max-w-[1705px] px-4 sm:px-6 lg:px-8 overflow-hidden">
+
+      <section className="relative mx-auto max-w-[1705px] px-4 overflow-hidden">
         {/* Left Arrow */}
         <button
           onClick={prev}
@@ -35,7 +75,7 @@ export default function App() {
           className="absolute left-2 top-1/2 z-10 -translate-y-1/2 h-[50px] w-[50px] flex items-center justify-center rounded-full bg-white p-3 shadow-md disabled:opacity-40"
           aria-label="Previous"
         >
-          <img src={leftArrow} alt="Left arrow" />
+          <img src={leftArrow} alt="Previous" />
         </button>
 
         {/* Right Arrow */}
@@ -45,13 +85,13 @@ export default function App() {
           className="absolute right-2 top-1/2 z-10 -translate-y-1/2 h-[50px] w-[50px] flex items-center justify-center rounded-full bg-white p-3 shadow-md disabled:opacity-40"
           aria-label="Next"
         >
-          <img src={rightArrow} alt="Right arrow" />
+          <img src={rightArrow} alt="Next" />
         </button>
 
         {/* Carousel */}
         <motion.div
           className="flex gap-6"
-          animate={{ x: `-${index * 100}%` }}
+          animate={{ x: `-${(index * 100) / visibleCards}%` }}
           transition={{ duration: 0.6, ease: "easeInOut" }}
         >
           {DATA.map((item) => (
@@ -61,17 +101,17 @@ export default function App() {
 
         {/* Dots */}
         <div className="flex justify-center mt-6 gap-4">
-          {DATA.map((_, i) => (
+          {Array.from({ length: maxIndex + 1 }).map((_, i) => (
             <button
               key={i}
               onClick={() => setIndex(i)}
               aria-label={`Go to slide ${i + 1}`}
-              className="relative w-4 h-4 rounded-full bg-gray-300"
+              className="relative w-2.5 h-2.5 rounded-full bg-gray-300"
             >
               {index === i && (
                 <motion.div
                   layoutId="activeDot"
-                  className="absolute top-0 left-0 w-4 h-4 rounded-full bg-gray-900"
+                  className="absolute inset-0 rounded-full bg-gray-900"
                   initial={false}
                   transition={{ type: "spring", stiffness: 500, damping: 30 }}
                 />
@@ -83,6 +123,8 @@ export default function App() {
     </div>
   );
 }
+
+/* -------------------- CARD -------------------- */
 
 function Card() {
   return (
@@ -107,7 +149,8 @@ function Card() {
         <h3 className="text-lg font-semibold">Urban Tails Pet Hotel</h3>
 
         <p className="flex items-center gap-2 mt-1 text-sm text-gray-500">
-          <FaLocationDot /> 220, Sikender Pur Vashisht Complex, M G Road
+          <FaLocationDot />
+          220, Sikender Pur Vashisht Complex, M G Road
         </p>
 
         <div className="flex items-center gap-x-[5px] pt-4">
@@ -115,10 +158,17 @@ function Card() {
             <img src={call} alt="" /> Call
           </Button>
 
-          <Button variant="whatsapp">
-            <img src={whatsapp} alt="" />
-            WhatsApp
-          </Button>
+          <a
+            href="https://wa.me/c/918826022355"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Button variant="whatsapp">
+              <img src={whatsapp} alt="" />
+              WhatsApp
+            </Button>
+          </a>
+
           <Button variant="direction">
             <img src={navigation} alt="" />
             Direction

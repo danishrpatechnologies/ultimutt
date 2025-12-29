@@ -3,80 +3,98 @@ import featureMockupLeft from "@/assets/feature-mockup-left.png";
 import featureMockupRight from "@/assets/feature-mockup-right.png";
 import checkmarkSquare from "@/assets/checkmark-square.png";
 
-const feature = () => {
+const Feature = () => {
   return (
     <div
       id="features"
-      className='mx-auto flex max-w-full items-center justify-between py-8 md:px-[100px] px-[20px] bg-[url("/images/feature-bg.png")] bg-no-repeat bg-cover max-h-[550px]'
+      className='mx-auto max-w-full
+      py-8
+      px-4
+      md:px-[100px]
+      bg-[url("/images/feature-bg.png")] bg-no-repeat bg-cover
+      md:max-h-[550px]'
     >
-      <div className="flex items-start justify-between w-full gap-4 h-full">
-        <div className="relative flex flex-col h-full min-h-[455px]">
-          <h2 className="md:text-[48px] sm:text-[32px] font-semibold">
+      <div className="flex flex-col md:flex-row items-center md:items-start justify-between w-full gap-6 md:gap-4">
+        {/* LEFT */}
+        <div className="relative flex flex-col h-full md:min-h-[455px] w-full md:w-auto sm:min-h-[auto]">
+          <h2 className="text-[32px] md:text-[48px] font-semibold text-center md:text-left mb-3">
             App Features
           </h2>
 
-          <div className="flex flex-col gap-4 min-h-[calc(100%-72px)] h-full justify-center flex-[1]">
-            <div className="flex items-center justify-center gap-4">
-              <div className="flex flex-row gap-[8px] rounded-full bg-white py-[10px] px-[24px] w-auto">
+          {/* FEATURES */}
+          <div className="flex flex-col gap-4 justify-center md:flex-1 ">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <div className="flex flex-row gap-[8px] rounded-full bg-white py-[10px] px-[24px] w-auto items-center ">
                 <img
                   src={checkmarkSquare}
-                  className="aspect-square w-[24px] h-[24px]"
                   alt=""
-                />{" "}
+                  className="h-[24px] w-[24px]"
+                />
                 Get timely updates on the app
               </div>
-              <div className="flex flex-row gap-[8px] rounded-full bg-white py-[10px] px-[24px] w-auto">
+              <div className="flex flex-row gap-[8px] rounded-full bg-white py-[10px] px-[24px] w-auto items-center ">
                 <img
                   src={checkmarkSquare}
-                  className="aspect-square w-[24px] h-[24px]"
                   alt=""
-                />{" "}
+                  className="h-[24px] w-[24px]"
+                />
                 Time for your furry friend’s glow-up
               </div>
             </div>
-            <div className="flex items-center justify-center gap-4">
-              <div className="flex flex-row gap-[8px] rounded-full bg-white py-[10px] px-[24px] w-auto">
+
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <div className="flex flex-row gap-[8px] rounded-full bg-white py-[10px] px-[24px] w-auto items-center ">
                 <img
                   src={checkmarkSquare}
-                  className="aspect-square w-[24px] h-[24px]"
                   alt=""
-                />{" "}
+                  className="h-[24px] w-[24px]"
+                />
                 Boarding, daycare, and grooming — all in one place
               </div>
-              <div className="flex flex-row gap-[8px] rounded-full bg-white py-[10px] px-[24px] w-auto">
+              <div className="flex flex-row gap-[8px] rounded-full bg-white py-[10px] px-[24px] w-auto items-center ">
                 <img
                   src={checkmarkSquare}
-                  className="aspect-square w-[24px] h-[24px]"
                   alt=""
-                />{" "}
+                  className="h-[24px] w-[24px]"
+                />
                 At-your-doorstep pet services
               </div>
             </div>
-            <div className="flex items-center justify-center gap-4">
-              <div className="flex flex-row gap-[8px] rounded-full bg-white py-[10px] px-[24px] w-auto">
+
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <div className="flex flex-row gap-[8px] rounded-full bg-white py-[10px] px-[24px] w-auto items-center ">
                 <img
                   src={checkmarkSquare}
-                  className="aspect-square w-[24px] h-[24px]"
                   alt=""
-                />{" "}
+                  className="h-[24px] w-[24px]"
+                />
                 Activity Tracking for Boarding Services
               </div>
-              <div className="flex flex-row gap-[8px] rounded-full bg-white py-[10px] px-[24px] w-auto">
+              <div className="flex flex-row gap-[8px] rounded-full bg-white py-[10px] px-[24px] w-auto items-center ">
                 <img
                   src={checkmarkSquare}
-                  className="aspect-square w-[24px] h-[24px]"
                   alt=""
-                />{" "}
+                  className="h-[24px] w-[24px]"
+                />
                 Pickup and drop service available
               </div>
             </div>
           </div>
         </div>
-        <div className="right flex flex-row gap-[0px] ml-[50px]">
-          <img src={featureMockupLeft} alt="" />
+
+        {/* RIGHT IMAGES */}
+        <div className="right flex flex-row gap-0 md:ml-[50px] mt-8 md:mt-0">
+          <img
+            src={featureMockupLeft}
+            className="w-[180px] sm:w-[220px] md:w-auto"
+            alt=""
+          />
           <img
             src={featureMockupRight}
-            className="relative left-[-80px]"
+            className="relative
+            left-0
+            md:left-[-80px]
+            w-[180px] sm:w-[220px] md:w-auto"
             alt=""
           />
         </div>
@@ -85,4 +103,4 @@ const feature = () => {
   );
 };
 
-export default feature;
+export default Feature;
