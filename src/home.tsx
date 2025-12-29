@@ -1,8 +1,26 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import appStore from "@/assets/app-store-white.svg";
 import playStore from "@/assets/play-store-white.svg";
 
 const Home = () => {
+  const location = useLocation();
+
+  // 🔁 Scroll to section after redirect
+  useEffect(() => {
+    const scrollTo = location.state?.scrollTo;
+    if (!scrollTo) return;
+
+    const element = document.getElementById(scrollTo);
+    if (!element) return;
+
+    const headerOffset = 90;
+    const elementPosition = element.getBoundingClientRect().top;
+    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+    window.scrollTo({ top: offsetPosition, behavior: "smooth" });
+  }, [location]);
+
   return (
     <div
       id="home"
@@ -52,7 +70,7 @@ const Home = () => {
         </div>
       </div>
 
-      {/* DESKTOP PHONE MOCKUP (UNCHANGED, HIDDEN ON MOBILE) */}
+      {/* DESKTOP PHONE MOCKUP */}
       <img
         src="src/assets/i-phone-mockup.png"
         alt=""

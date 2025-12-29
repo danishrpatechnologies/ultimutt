@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import siteLogo from "@/assets/ultimutt-logo.svg";
 
 const SECTIONS = ["home", "features", "facilities", "testimonials"];
 
 const Header = () => {
   const [activeSection, setActiveSection] = useState("home");
-
   const [isMounted, setIsMounted] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const openMenu = () => {
     setIsMounted(true);
@@ -16,22 +19,32 @@ const Header = () => {
 
   const closeMenu = () => {
     setIsOpen(false);
-    setTimeout(() => setIsMounted(false), 300); // match animation duration
+    setTimeout(() => setIsMounted(false), 300);
   };
 
   const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    if (!element) return;
+    // ✅ Already on homepage → scroll
+    if (location.pathname === "/") {
+      const element = document.getElementById(id);
+      if (!element) return;
 
-    const headerOffset = 90;
-    const elementPosition = element.getBoundingClientRect().top;
-    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+      const headerOffset = 90;
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition =
+        elementPosition + window.pageYOffset - headerOffset;
 
-    window.scrollTo({ top: offsetPosition, behavior: "smooth" });
+      window.scrollTo({ top: offsetPosition, behavior: "smooth" });
+    }
+    // 🔁 Not on homepage → redirect first
+    else {
+      navigate("/", { state: { scrollTo: id } });
+    }
   };
 
-  // 🔥 Intersection Observer
+  // 🔥 Intersection Observer (only on homepage)
   useEffect(() => {
+    if (location.pathname !== "/") return;
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -49,7 +62,7 @@ const Header = () => {
     });
 
     return () => observer.disconnect();
-  }, []);
+  }, [location.pathname]);
 
   // 🔒 Lock body scroll
   useEffect(() => {
@@ -104,7 +117,6 @@ const Header = () => {
       {/* Mobile Sidebar */}
       {isMounted && (
         <div className="fixed inset-0 z-200 lg:hidden">
-          {/* Backdrop */}
           <div
             className={`absolute inset-0 bg-black/30 transition-opacity duration-300 ${
               isOpen ? "opacity-100" : "opacity-0"
@@ -112,7 +124,6 @@ const Header = () => {
             onClick={closeMenu}
           />
 
-          {/* Sidebar */}
           <div
             className={`absolute right-0 top-0 h-full w-full max-w-sm bg-white p-6
             transform transition-transform duration-300 ease-in-out

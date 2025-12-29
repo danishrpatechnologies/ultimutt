@@ -26,7 +26,7 @@ const Footer = () => {
         "
       >
         {/* Left */}
-        <div className="fflex flex-col gap-4 w-full md:max-w-[420px] text-center md:text-left">
+        <div className="flex flex-col gap-4 w-full md:max-w-[420px] text-center md:text-left mb-3">
           <img
             src={footerLogo}
             alt="Ultimutt Logo"
@@ -68,7 +68,7 @@ const Footer = () => {
         <div className="hidden md:block w-[1px] h-[180px] bg-white/20 mx-6" />
 
         {/* Middle */}
-        <div className="flex flex-col gap-4 w-full md:max-w-[360px] text-center md:text-left">
+        <div className="flex flex-col gap-4 w-full md:max-w-[360px] text-center md:text-left mb-3">
           <h3 className="text-[18px] font-semibold">Download Our App</h3>
 
           <p className="text-[14px] md:text-[16px] text-white/70">
@@ -97,7 +97,7 @@ const Footer = () => {
         <div className="hidden md:block w-[1px] h-[180px] bg-white/20 mx-6" />
 
         {/* Right */}
-        <div className="flex flex-col gap-4 w-full md:max-w-[320px] text-center md:text-left">
+        <div className="flex flex-col gap-4 w-full md:max-w-[320px] text-center md:text-left mb-3">
           <h3 className="text-[18px] font-semibold">Contact Us</h3>
 
           <p className="text-[14px] md:text-[15px] text-white/80">
